@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeFi Agent Toolkit — AI-Powered DeFi Automation</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #0a0a0a;
+            --surface: #111;
+            --border: #222;
+            --text: #e0e0e0;
+            --text-dim: #888;
+            --accent: #00d4aa;
+            --accent2: #7c3aed;
+            --gradient: linear-gradient(135deg, #00d4aa, #7c3aed);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            padding: 2rem;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 212, 170, 0.1), transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-icon {
+            font-size: 5rem;
+            margin-bottom: 2rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero .subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            color: var(--text-dim);
+            max-width: 700px;
+            margin-bottom: 3rem;
+        }
+
+        .badges {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 3rem;
+        }
+
+        .badge {
+            padding: 0.5rem 1rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: #000;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--surface);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+        }
+
+        /* Features */
+        .features {
+            padding: 8rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-dim);
+            max-width: 600px;
+            margin: 0 auto 4rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-card p {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+        }
+
+        /* Code Example */
+        .code-section {
+            padding: 8rem 0;
+            background: var(--surface);
+        }
+
+        .code-block {
+            background: #000;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .code-block pre {
+            color: var(--text-dim);
+        }
+
+        .code-block .comment { color: #6a9955; }
+        .code-block .command { color: var(--accent); }
+        .code-block .flag { color: var(--accent2); }
+        .code-block .value { color: #ce9178; }
+
+        /* Security */
+        .security {
+            padding: 8rem 0;
+        }
+
+        .security-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .security-item {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .security-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .security-item h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .security-item p {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        /* Chains */
+        .chains {
+            padding: 8rem 0;
+            background: var(--surface);
+        }
+
+        .chain-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .chain-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1.5rem 2rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            min-width: 120px;
+        }
+
+        .chain-logo {
+            font-size: 2.5rem;
+        }
+
+        .chain-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Install */
+        .install {
+            padding: 8rem 0;
+            text-align: center;
+        }
+
+        .install-block {
+            background: #000;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 1.1rem;
+            display: inline-block;
+            margin-top: 2rem;
+            color: var(--accent);
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem 0;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        footer p {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 0 1rem; }
+            .hero { min-height: auto; padding: 6rem 1rem; }
+            .features, .code-section, .security, .chains, .install { padding: 4rem 0; }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <div class="container">
+            <div class="hero-icon">🤖</div>
+            <h1>DeFi Agent Toolkit</h1>
+            <p class="subtitle">
+                AI-powered DeFi automation — smart swap routing, yield optimization,
+                and portfolio management across multiple chains.
+            </p>
+            <div class="badges">
+                <span class="badge">Python 3.10+</span>
+                <span class="badge">MIT License</span>
+                <span class="badge">5 Chains</span>
+                <span class="badge">Non-Custodial</span>
+            </div>
+            <div class="cta-group">
+                <a href="https://github.com/wardiinari3-collab/defi-agent-toolkit" class="btn btn-primary">
+                    ⭐ GitHub
+                </a>
+                <a href="#quickstart" class="btn btn-secondary">
+                    🚀 Quick Start
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Features</h2>
+            <p class="section-subtitle">Everything you need for automated DeFi operations</p>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Smart Swap Router</h3>
+                    <p>Find the best rates across 1inch, 0x, and Paraswap. Automatic route optimization with slippage protection.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌾</div>
+                    <h3>Yield Optimizer</h3>
+                    <p>Scan and compare yield opportunities. Auto-compound strategies to maximize your returns.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Portfolio Tracker</h3>
+                    <p>Real-time portfolio valuation across chains. Track holdings, PnL, and historical performance.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⛽</div>
+                    <h3>Gas Optimizer</h3>
+                    <p>Real-time gas estimates across chains. Optimal timing suggestions to save on fees.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>AI-Powered</h3>
+                    <p>Intelligent routing, timing, and risk assessment. Learns from market conditions.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔐</div>
+                    <h3>Non-Custodial</h3>
+                    <p>Your keys never leave your environment. Simulation-first approach prevents costly mistakes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="code-section" id="quickstart">
+        <div class="container">
+            <h2 class="section-title">Quick Start</h2>
+            <p class="section-subtitle">Get started in seconds</p>
+            <div class="code-block">
+                <pre>
+<span class="comment"># Install</span>
+<span class="command">pip install</span> <span class="value">defi-agent-toolkit</span>
+
+<span class="comment"># Configure</span>
+<span class="command">cp</span> .env.example .env
+<span class="comment"># Edit .env with your RPC endpoints</span>
+
+<span class="comment"># Find best swap route</span>
+<span class="command">defi-agent swap</span> <span class="flag">--from</span> ETH <span class="flag">--to</span> USDC <span class="flag">--amount</span> 0.1 <span class="flag">--chain</span> ethereum
+
+<span class="comment"># Scan yield opportunities</span>
+<span class="command">defi-agent yield</span> <span class="flag">--chains</span> ethereum base <span class="flag">--min-apy</span> 5
+
+<span class="comment"># Check portfolio</span>
+<span class="command">defi-agent portfolio</span> <span class="flag">--address</span> 0x... <span class="flag">--chains</span> ethereum base arbitrum
+
+<span class="comment"># Check gas prices</span>
+<span class="command">defi-agent gas</span> <span class="flag">--chains</span> ethereum base <span class="flag">--speed</span> fast
+                </pre>
+            </div>
+        </div>
+    </section>
+
+    <section class="security">
+        <div class="container">
+            <h2 class="section-title">Security First</h2>
+            <p class="section-subtitle">Built with safety as the top priority</p>
+            <div class="security-grid">
+                <div class="security-item">
+                    <div class="security-icon">🔑</div>
+                    <h3>Non-Custodial</h3>
+                    <p>Private keys loaded from environment only. Never stored or transmitted.</p>
+                </div>
+                <div class="security-item">
+                    <div class="security-icon">🧪</div>
+                    <h3>Simulation First</h3>
+                    <p>All transactions simulated before broadcast. Catch errors before they cost you.</p>
+                </div>
+                <div class="security-item">
+                    <div class="security-icon">🛡️</div>
+                    <h3>Slippage Protection</h3>
+                    <p>Configurable max slippage with automatic revert on excessive price impact.</p>
+                </div>
+                <div class="security-item">
+                    <div class="security-icon">✅</div>
+                    <h3>Contract Allowlist</h3>
+                    <p>Only interact with verified, trusted contracts. Unknown contracts flagged.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="chains">
+        <div class="container">
+            <h2 class="section-title">Supported Chains</h2>
+            <p class="section-subtitle">Multi-chain support out of the box</p>
+            <div class="chain-grid">
+                <div class="chain-item">
+                    <div class="chain-logo">Ξ</div>
+                    <div class="chain-name">Ethereum</div>
+                </div>
+                <div class="chain-item">
+                    <div class="chain-logo">🔵</div>
+                    <div class="chain-name">Base</div>
+                </div>
+                <div class="chain-item">
+                    <div class="chain-logo">🔷</div>
+                    <div class="chain-name">Arbitrum</div>
+                </div>
+                <div class="chain-item">
+                    <div class="chain-logo">🟣</div>
+                    <div class="chain-name">Polygon</div>
+                </div>
+                <div class="chain-item">
+                    <div class="chain-logo">🔴</div>
+                    <div class="chain-name">Optimism</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="install">
+        <div class="container">
+            <h2 class="section-title">Install Now</h2>
+            <p class="section-subtitle">Get started with DeFi Agent Toolkit</p>
+            <div class="install-block">
+                pip install defi-agent-toolkit
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>
+                DeFi Agent Toolkit &copy; 2024 &mdash;
+                <a href="https://github.com/wardiinari3-collab/defi-agent-toolkit">GitHub</a> &mdash;
+                MIT License
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

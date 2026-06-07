@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "defi-agent-toolkit"
+version = "0.1.0"
+description = "AI-powered DeFi automation toolkit — swap routing, yield optimization, portfolio management"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+authors = [{ name = "DeFi Agent Contributors" }]
+keywords = ["defi", "blockchain", "ethereum", "swap", "yield", "portfolio", "ai"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Office/Business :: Financial",
+]
+
+dependencies = [
+    "httpx>=0.24.0",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+]
+
+[project.scripts]
+defi-agent = "defi_agent.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[project.urls]
+Homepage = "https://github.com/wardiinari3-collab/defi-agent-toolkit"
+Documentation = "https://github.com/wardiinari3-collab/defi-agent-toolkit#readme"
+Repository = "https://github.com/wardiinari3-collab/defi-agent-toolkit"
+Issues = "https://github.com/wardiinari3-collab/defi-agent-toolkit/issues"

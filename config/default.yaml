@@ -1,0 +1,44 @@
+# Default configuration for DeFi Agent Toolkit
+# NO SECRETS — only non-sensitive defaults
+
+chains:
+  ethereum:
+    chain_id: 1
+    native_token: ETH
+    block_explorer: https://etherscan.io
+    avg_block_time: 12.0
+
+  base:
+    chain_id: 8453
+    native_token: ETH
+    block_explorer: https://basescan.org
+    avg_block_time: 2.0
+
+  arbitrum:
+    chain_id: 42161
+    native_token: ETH
+    block_explorer: https://arbiscan.io
+    avg_block_time: 0.25
+
+  polygon:
+    chain_id: 137
+    native_token: MATIC
+    block_explorer: https://polygonscan.com
+    avg_block_time: 2.0
+
+  optimism:
+    chain_id: 10
+    native_token: ETH
+    block_explorer: https://optimistic.etherscan.io
+    avg_block_time: 2.0
+
+defaults:
+  slippage: 1.0
+  gas_speed: standard
+  max_price_impact: 5.0
+  min_compound_value: 10.0
+
+security:
+  require_simulation: true
+  max_approval_amount: "exact"  # 'exact' or 'unlimited'
+  trusted_only: true
