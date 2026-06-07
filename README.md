@@ -6,6 +6,8 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![GitHub Pages](https://img.shields.io/badge/GitHub-Pages-brightgreen)](https://tivusbart-crypto.github.io/defi-agent-toolkit/)
 
+🚀 **Live Demo:** [https://tivusbart-crypto.github.io/defi-agent-toolkit/](https://tivusbart-crypto.github.io/defi-agent-toolkit/)
+
 ## ✨ Features
 
 - **🔄 Smart Swap Router** — Find best rates across 1inch, 0x, 1inch, Paraswap
