@@ -40,7 +40,7 @@ defi-agent = "defi_agent.cli:main"
 where = ["src"]
 
 [project.urls]
-Homepage = "https://github.com/wardiinari3-collab/defi-agent-toolkit"
-Documentation = "https://github.com/wardiinari3-collab/defi-agent-toolkit#readme"
-Repository = "https://github.com/wardiinari3-collab/defi-agent-toolkit"
-Issues = "https://github.com/wardiinari3-collab/defi-agent-toolkit/issues"
+Homepage = "https://github.com/tivusbart-crypto/defi-agent-toolkit"
+Documentation = "https://github.com/tivusbart-crypto/defi-agent-toolkit#readme"
+Repository = "https://github.com/tivusbart-crypto/defi-agent-toolkit"
+Issues = "https://github.com/tivusbart-crypto/defi-agent-toolkit/issues"
